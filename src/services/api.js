@@ -23,6 +23,7 @@ async function apiGet(action, params = {}) {
   Object.entries(params).forEach(([k, v]) => {
     if (v !== undefined && v !== null) url.searchParams.set(k, String(v));
   });
+  url.searchParams.set('_t', Date.now()); // Prevent aggressive browser caching
   const res = await fetch(url.toString());
   const json = await res.json();
   if (json.error) throw new Error(json.error);

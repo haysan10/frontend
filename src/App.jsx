@@ -114,8 +114,10 @@ export default function App() {
         } else {
           setView('portal'); 
         }
-      } catch {
-        setView('portal');
+      } catch (err) {
+        console.error("Initialization Failed:", err);
+        // Do not force portal if it fails. Let's force setup so users see something or can re-enter API link if needed.
+        setView('setup');
       }
     })();
   }, []);
