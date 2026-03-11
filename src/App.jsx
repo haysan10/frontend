@@ -269,9 +269,13 @@ export default function App() {
     try {
       const res = await api.performSetup(setupDbId, setupPin);
       hideLoader();
-      if (res.success) { showToast(res.message, 'success'); navigate('portal'); }
-      else showToast(res.message, 'error');
-    } catch (e) { hideLoader(); showToast(e.message, 'error'); }
+      // apiPost automatically unwraps the response, so if it finishes without throwing, it's a success
+      showToast(res.message || "Sistem berhasil diinisialisasi!", 'success'); 
+      navigate('portal');
+    } catch (e) { 
+      hideLoader(); 
+      showToast(e.message || "Gagal melakukan inisialisasi", 'error'); 
+    }
   };
 
   // ==================== BUILDER ====================
