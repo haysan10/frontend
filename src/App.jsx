@@ -108,9 +108,16 @@ export default function App() {
   useEffect(() => {
     (async () => {
       try {
+        const hasSeenSetupLocally = localStorage.getItem('has_seen_setup');
         const res = await api.checkSetup();
-        if (!res.isSetup) setView('setup');
-        else setView('portal');
+        
+        // Memaksa tampil setup SEKALI di browser ini walaupun backend (res.isSetup) bilang sudah pernah setup.
+        if (!res.isSetup || !hasSeenSetupLocally) {
+          setView('setup');
+          localStorage.setItem('has_seen_setup', 'true'); // Tandai bahwa setup sudah ditayangkan sekali
+        } else {
+          setView('portal'); 
+        }
       } catch {
         setView('portal');
       }
