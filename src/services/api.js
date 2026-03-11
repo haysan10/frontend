@@ -7,14 +7,21 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://script.google.com/macros/s/AKfycbyRn6Bl75cvEHr09XkzHJkfilD6u9JU1GENZ6oMII0zJ7tFX2TNKzozeih9qU888KVuiw/exec';
 
 async function apiPost(action, data = {}) {
-  // Use plain text to avoid CORS preflight, and follow redirects since GAS responds with 302
   const res = await fetch(BASE_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: { 'Content-Type': 'text/plain' },
     redirect: 'follow', 
-    body: JSON.stringify({ action, payload: data }), // <-- wrap in payload so it matches backend parsing
+    body: JSON.stringify({ action, payload: data }),
   });
-  const json = await res.json();
+  
+  const text = await res.text();
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch (err) {
+    throw new Error("Gagal terhubung ke Server FormHub. Pastikan URL API benar.");
+  }
+  
   if (json.error) throw new Error(json.error);
   return json.data !== undefined ? json.data : json;
 }
