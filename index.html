@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>FormHub - Smart Form Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
+
+        :root {
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-top: env(safe-area-inset-top, 0px);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f4f8;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-roboto { font-family: 'Roboto', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        .loader { border-top-color: currentColor; animation: spinner 1s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+        .animate-shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+        .input-error { border-color: #ef4444 !important; background-color: #fef2f2 !important; color: #b91c1c !important; }
+        .error-text { color: #ef4444; font-size: 0.75rem; font-weight: 700; margin-top: 0.5rem; display: none; }
+        .has-error .error-text { display: flex; align-items: center; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @media (max-width: 640px) { ::-webkit-scrollbar { display: none; } }
+
+        .smooth-transition { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .tap-effect:active { transform: scale(0.95); opacity: 0.9; }
+
+        input:not([type="checkbox"]):focus, select:focus, textarea:focus {
+            outline: none; box-shadow: 0 0 0 4px rgba(59,130,246,0.15); border-color: #3b82f6 !important; background-color: #ffffff !important;
+        }
+        input[type="checkbox"]:focus { box-shadow: 0 0 0 4px rgba(59,130,246,0.15); }
+
+        .logic-hide { opacity: 0; max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none !important; }
+        .logic-show { opacity: 1; max-height: 2000px; }
+
+        .pb-safe { padding-bottom: calc(1rem + var(--safe-area-bottom)); }
+        .pt-safe { padding-top: calc(1rem + var(--safe-area-top)); }
+        .mb-safe { margin-bottom: calc(6rem + var(--safe-area-bottom)); }
+
+        .bottom-nav-item { color: #9ca3af; }
+        .bottom-nav-item.active { color: #2563eb; }
+
+        .app-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .admin-gradient { background: linear-gradient(135deg, #312e81 0%, #6366f1 100%); }
+
+        .drag-over { border: 2px dashed #3b82f6 !important; background-color: #eff6ff !important; transform: scale(1.02); }
+        .dragging { opacity: 0.4; }
+
+        /* Dynamic & Glassmorphism Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .animated-bg {
+            background: linear-gradient(-45deg, #eff6ff, #e0e7ff, #f3e8ff, #f8fafc);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: moveBlob 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -50px) scale(1.1); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+        <div class="blob bg-blue-300 w-96 h-96 top-[-10%] left-[-10%]"></div>
+        <div class="blob bg-purple-300 w-96 h-96 bottom-[-10%] right-[-10%]" style="animation-delay: -5s;"></div>
+        <div class="blob bg-emerald-200 w-80 h-80 top-[40%] left-[60%]" style="animation-delay: -2s; filter: blur(80px);"></div>
+    </div>
+</head>
+<body class="text-slate-800 h-screen flex flex-col antialiased overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
