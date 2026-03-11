@@ -7,10 +7,12 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://script.google.com/macros/s/AKfycbyRn6Bl75cvEHr09XkzHJkfilD6u9JU1GENZ6oMII0zJ7tFX2TNKzozeih9qU888KVuiw/exec';
 
 async function apiPost(action, data = {}) {
+  // Use plain text to avoid CORS preflight, and follow redirects since GAS responds with 302
   const res = await fetch(BASE_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ action, ...data }),
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    redirect: 'follow', 
+    body: JSON.stringify({ action, payload: data }), // <-- wrap in payload so it matches backend parsing
   });
   const json = await res.json();
   if (json.error) throw new Error(json.error);
