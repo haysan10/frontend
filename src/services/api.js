@@ -46,16 +46,16 @@ export const getFormDetail = (formId) => apiGet('getFormDetail', { formId });
 export const getFormResponses = (formId) => apiGet('getFormResponses', { formId });
 export const getDatabaseList = () => apiGet('getDatabaseList');
 export const getDatabaseData = (sheetName) => apiGet('getDatabaseData', { sheetName });
-export const lookupData = (sheet, searchCol, val, returnCol) =>
-  apiGet('lookupData', { sheet, searchCol, val, returnCol });
+export const lookupData = (sheetName, searchCol, searchValue, returnCol) =>
+  apiGet('lookupData', { sheetName, searchCol, searchValue, returnCol });
 
-// POST endpoints
-export const performSetup = (dbId, pin) => apiPost('performSetup', { dbId, pin });
+// POST endpoints — parameter names MUST match backend code.gs POST_ACTIONS
+export const performSetup = (dbId, pin) => apiPost('performSetup', { spreadsheetId: dbId, adminPin: pin });
 export const verifyAdmin = (pin) => apiPost('verifyAdmin', { pin });
 export const saveForm = (payload) => apiPost('saveForm', payload);
 export const publishForm = (formId) => apiPost('publishForm', { formId });
-export const toggleFormStatus = (formId, status) => apiPost('toggleFormStatus', { formId, status });
+export const toggleFormStatus = (formId, status) => apiPost('toggleFormStatus', { formId, newStatus: status });
 export const deleteForm = (formId) => apiPost('deleteForm', { formId });
-export const submitResponse = (formId, payload) => apiPost('submitResponse', { formId, payload });
+export const submitResponse = (formId, data) => apiPost('submitResponse', { formId, data });
 export const updateResponseCell = (formId, rowIdx, colIdx, val) =>
-  apiPost('updateResponseCell', { formId, rowIdx, colIdx, val });
+  apiPost('updateResponseCell', { formId, rowIdx, colIdx, newValue: val });
