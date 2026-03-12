@@ -69,12 +69,12 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
               <h3 className="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-3"><i className="fas fa-heading text-blue-500 mr-2"></i>Info Utama</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Judul Formulir</label>
-                  <input type="text" value={builderTitle} onChange={e => setBuilderTitle(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 placeholder-slate-400" placeholder="Contoh: Form Pendaftaran" />
+                  <label htmlFor="builderTitle" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Judul Formulir</label>
+                  <input id="builderTitle" name="builderTitle" type="text" value={builderTitle} onChange={e => setBuilderTitle(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 placeholder-slate-400" placeholder="Contoh: Form Pendaftaran" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Deskripsi (Opsional)</label>
-                  <textarea value={builderDesc} onChange={e => setBuilderDesc(e.target.value)} rows={4} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm text-slate-700" placeholder="Tuliskan instruksi pengisian di sini..."></textarea>
+                  <label htmlFor="builderDesc" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Deskripsi (Opsional)</label>
+                  <textarea id="builderDesc" name="builderDesc" value={builderDesc} onChange={e => setBuilderDesc(e.target.value)} rows={4} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm text-slate-700" placeholder="Tuliskan instruksi pengisian di sini..."></textarea>
                 </div>
               </div>
             </div>
@@ -83,8 +83,8 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
               <h3 className="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-3"><i className="fas fa-paint-roller text-blue-500 mr-2"></i>Tema & Tampilan</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Warna Utama</label>
-                  <select value={builderTheme} onChange={e => setBuilderTheme(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 app-select">
+                  <label htmlFor="builderTheme" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Warna Utama</label>
+                  <select id="builderTheme" name="builderTheme" value={builderTheme} onChange={e => setBuilderTheme(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 app-select">
                     <option value="blue">Biru (Default)</option>
                     <option value="emerald">Zamrud (Hijau)</option>
                     <option value="rose">Mawar (Merah)</option>
@@ -93,8 +93,8 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Jenis Huruf (Font)</label>
-                  <select value={builderFont} onChange={e => setBuilderFont(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 app-select">
+                  <label htmlFor="builderFont" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Jenis Huruf (Font)</label>
+                  <select id="builderFont" name="builderFont" value={builderFont} onChange={e => setBuilderFont(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 app-select">
                     <option value="font-jakarta">Plus Jakarta Sans</option>
                     <option value="font-inter">Inter</option>
                     <option value="font-roboto">Roboto</option>
@@ -102,8 +102,8 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Gambar Sampul (URL Opsional)</label>
-                  <input type="text" value={builderCover} onChange={e => setBuilderCover(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm text-slate-700 placeholder-slate-400" placeholder="https://contoh.com/gambar.jpg" />
+                  <label htmlFor="builderCover" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Gambar Sampul (URL Opsional)</label>
+                  <input id="builderCover" name="builderCover" type="text" value={builderCover} onChange={e => setBuilderCover(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white text-sm text-slate-700 placeholder-slate-400" placeholder="https://contoh.com/gambar.jpg" />
                 </div>
               </div>
             </div>
@@ -112,16 +112,16 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
               <h3 className="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-3"><i className="fas fa-cogs text-blue-500 mr-2"></i>Pengaturan Lanjutan</h3>
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Nama Tab Sheet (Database)</label>
-                  <input type="text" value={builderSheetName} onChange={e => setBuilderSheetName(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white focus:border-blue-400 text-sm font-bold text-slate-900 placeholder-slate-400 smooth-transition" placeholder="Otomatis (Default)" />
+                  <label htmlFor="builderSheetName" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Nama Tab Sheet (Database)</label>
+                  <input id="builderSheetName" name="builderSheetName" type="text" value={builderSheetName} onChange={e => setBuilderSheetName(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white focus:border-blue-400 text-sm font-bold text-slate-900 placeholder-slate-400 smooth-transition" placeholder="Otomatis (Default)" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Pesan Setelah Submit</label>
-                  <input type="text" value={builderSuccessMsg} onChange={e => setBuilderSuccessMsg(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white focus:border-blue-400 text-sm text-slate-700 placeholder-slate-400 smooth-transition" placeholder="Terima kasih, data Anda tersimpan." />
+                  <label htmlFor="builderSuccessMsg" className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Pesan Setelah Submit</label>
+                  <input id="builderSuccessMsg" name="builderSuccessMsg" type="text" value={builderSuccessMsg} onChange={e => setBuilderSuccessMsg(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white focus:border-blue-400 text-sm text-slate-700 placeholder-slate-400 smooth-transition" placeholder="Terima kasih, data Anda tersimpan." />
                 </div>
                 <div>
-                  <label className="flex items-center text-sm cursor-pointer font-bold text-slate-700 bg-slate-50 p-3 rounded-2xl border border-slate-100 tap-effect smooth-transition">
-                    <input type="checkbox" checked={builderIsPublic} onChange={e => setBuilderIsPublic(e.target.checked)} className="mr-3 h-5 w-5 text-blue-600 rounded" />
+                  <label htmlFor="builderIsPublic" className="flex items-center text-sm cursor-pointer font-bold text-slate-700 bg-slate-50 p-3 rounded-2xl border border-slate-100 tap-effect smooth-transition">
+                    <input id="builderIsPublic" name="builderIsPublic" type="checkbox" checked={builderIsPublic} onChange={e => setBuilderIsPublic(e.target.checked)} className="mr-3 h-5 w-5 text-blue-600 rounded" />
                     Tampilkan di Papan Publik
                   </label>
                 </div>
@@ -177,12 +177,12 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
 
                       <div className="grid grid-cols-1 sm:grid-cols-12 gap-5">
                         <div className="sm:col-span-7">
-                          <label className={`block text-xs font-bold ${isUI ? 'text-blue-500' : 'text-slate-500'} uppercase tracking-widest mb-2`}>{labelHeader}</label>
-                          <input type="text" value={f.label} onChange={e => updateField(idx, 'label', e.target.value)} disabled={f.type === 'divider'} className={`w-full border-2 border-slate-100 rounded-2xl p-4 ${isUI ? 'bg-blue-50 focus:border-blue-400' : 'bg-slate-50 focus:border-slate-400'} focus:bg-white text-sm font-bold text-slate-900 smooth-transition`} placeholder={labelPlaceholder} />
+                          <label htmlFor={`field_label_${f.id}`} className={`block text-xs font-bold ${isUI ? 'text-blue-500' : 'text-slate-500'} uppercase tracking-widest mb-2`}>{labelHeader}</label>
+                          <input id={`field_label_${f.id}`} name={`field_label_${f.id}`} type="text" value={f.label} onChange={e => updateField(idx, 'label', e.target.value)} disabled={f.type === 'divider'} className={`w-full border-2 border-slate-100 rounded-2xl p-4 ${isUI ? 'bg-blue-50 focus:border-blue-400' : 'bg-slate-50 focus:border-slate-400'} focus:bg-white text-sm font-bold text-slate-900 smooth-transition`} placeholder={labelPlaceholder} />
                         </div>
                         <div className="sm:col-span-5">
-                          <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Jenis Komponen</label>
-                          <select value={f.type} onChange={e => updateField(idx, 'type', e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white focus:border-blue-400 text-sm font-bold text-slate-900 app-select smooth-transition">
+                          <label htmlFor={`field_type_${f.id}`} className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Jenis Komponen</label>
+                          <select id={`field_type_${f.id}`} name={`field_type_${f.id}`} value={f.type} onChange={e => updateField(idx, 'type', e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white focus:border-blue-400 text-sm font-bold text-slate-900 app-select smooth-transition">
                             <optgroup label="Input Data (Jawaban)">
                               <option value="text">Jawaban Pendek</option>
                               <option value="textarea">Paragraf Panjang</option>
@@ -206,8 +206,8 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
 
                       <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         {!isUI ? (
-                          <label className="flex items-center text-sm cursor-pointer font-bold text-slate-700 bg-slate-50 border border-slate-200 px-5 py-3 rounded-2xl tap-effect">
-                            <input type="checkbox" checked={f.required || false} onChange={e => updateField(idx, 'required', e.target.checked)} className="mr-3 h-5 w-5 text-blue-600 rounded" /> Wajib Diisi
+                          <label htmlFor={`field_req_${f.id}`} className="flex items-center text-sm cursor-pointer font-bold text-slate-700 bg-slate-50 border border-slate-200 px-5 py-3 rounded-2xl tap-effect">
+                            <input id={`field_req_${f.id}`} name={`field_req_${f.id}`} type="checkbox" checked={f.required || false} onChange={e => updateField(idx, 'required', e.target.checked)} className="mr-3 h-5 w-5 text-blue-600 rounded" /> Wajib Diisi
                           </label>
                         ) : (
                           <div className="text-[10px] font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200 uppercase tracking-widest">Elemen Visual</div>
@@ -217,16 +217,16 @@ export default function ViewFormBuilder({ builderFields, setBuilderFields, build
                       {hasOptions && (
                         <div className="mt-6 p-5 bg-indigo-50 border border-indigo-100 rounded-2xl relative">
                           <div className="absolute left-0 top-0 w-2 h-full bg-indigo-400 rounded-l-2xl"></div>
-                          <label className="block text-xs font-bold text-indigo-700 uppercase tracking-widest mb-3 ml-2">Opsi Pilihan (Pisahkan dengan Koma)</label>
-                          <input type="text" value={f.options || ''} onChange={e => updateField(idx, 'options', e.target.value)} placeholder="Pilihan 1, Pilihan 2, Pilihan 3..." className="w-full ml-2 border-2 border-transparent rounded-xl p-3 bg-white focus:border-indigo-300 text-sm font-bold shadow-sm outline-none" style={{ width: 'calc(100% - 0.5rem)' }} />
+                          <label htmlFor={`field_opt_${f.id}`} className="block text-xs font-bold text-indigo-700 uppercase tracking-widest mb-3 ml-2">Opsi Pilihan (Pisahkan dengan Koma)</label>
+                          <input id={`field_opt_${f.id}`} name={`field_opt_${f.id}`} type="text" value={f.options || ''} onChange={e => updateField(idx, 'options', e.target.value)} placeholder="Pilihan 1, Pilihan 2, Pilihan 3..." className="w-full ml-2 border-2 border-transparent rounded-xl p-3 bg-white focus:border-indigo-300 text-sm font-bold shadow-sm outline-none" style={{ width: 'calc(100% - 0.5rem)' }} />
                         </div>
                       )}
 
                       {isImage && (
                         <div className="mt-6 p-5 bg-teal-50 border border-teal-100 rounded-2xl relative">
                           <div className="absolute left-0 top-0 w-2 h-full bg-teal-400 rounded-l-2xl"></div>
-                          <label className="block text-xs font-bold text-teal-700 uppercase tracking-widest mb-3 ml-2">URL Gambar (Link Publik)</label>
-                          <input type="text" value={f.options || ''} onChange={e => updateField(idx, 'options', e.target.value)} placeholder="https://contoh.com/gambar.png" className="w-full ml-2 border-2 border-transparent rounded-xl p-3 bg-white focus:border-teal-300 text-sm font-bold shadow-sm outline-none" style={{ width: 'calc(100% - 0.5rem)' }} />
+                          <label htmlFor={`field_img_${f.id}`} className="block text-xs font-bold text-teal-700 uppercase tracking-widest mb-3 ml-2">URL Gambar (Link Publik)</label>
+                          <input id={`field_img_${f.id}`} name={`field_img_${f.id}`} type="text" value={f.options || ''} onChange={e => updateField(idx, 'options', e.target.value)} placeholder="https://contoh.com/gambar.png" className="w-full ml-2 border-2 border-transparent rounded-xl p-3 bg-white focus:border-teal-300 text-sm font-bold shadow-sm outline-none" style={{ width: 'calc(100% - 0.5rem)' }} />
                         </div>
                       )}
                     </div>

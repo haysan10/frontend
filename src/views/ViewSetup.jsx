@@ -9,12 +9,12 @@ export default function ViewSetup({ setupDbId, setSetupDbId, setupPin, setSetupP
         </div>
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">Spreadsheet ID</label>
-            <input type="text" value={setupDbId} onChange={e => setSetupDbId(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-slate-800 bg-slate-50 focus:bg-white focus:border-blue-400 smooth-transition text-base" placeholder="1A2B3C4D5E..." />
+            <label htmlFor="setupDbId" className="block text-sm font-bold text-slate-700 mb-2">Spreadsheet ID</label>
+            <input id="setupDbId" name="setupDbId" type="text" value={setupDbId} onChange={e => setSetupDbId(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-slate-800 bg-slate-50 focus:bg-white focus:border-blue-400 smooth-transition text-base" placeholder="1A2B3C4D5E..." />
           </div>
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">Buat PIN Keamanan Admin</label>
-            <input type="password" value={setupPin} onChange={e => setSetupPin(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-slate-800 bg-slate-50 focus:bg-white focus:border-blue-400 smooth-transition text-center tracking-[0.5em] text-xl font-bold" placeholder="••••••" />
+            <label htmlFor="setupPin" className="block text-sm font-bold text-slate-700 mb-2">Buat PIN Keamanan Admin</label>
+            <input id="setupPin" name="setupPin" type="password" value={setupPin} onChange={e => setSetupPin(e.target.value)} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-slate-800 bg-slate-50 focus:bg-white focus:border-blue-400 smooth-transition text-center tracking-[0.5em] text-xl font-bold" placeholder="••••••" />
           </div>
           <button onClick={handleSetup} className="w-full bg-slate-900 text-white p-4 rounded-2xl font-bold hover:bg-blue-600 shadow-lg shadow-slate-300 smooth-transition tap-effect mt-4 text-lg">Mulai Setup Otomatis</button>
         </div>

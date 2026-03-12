@@ -259,13 +259,13 @@ export default function ViewFormFill({ formTitle, formDesc, formTheme, formFont,
 
                   let input = null;
                   if (['text', 'number', 'email', 'date', 'time'].includes(field.type)) {
-                    input = <input type={field.type} value={values[field.id] || ''} onChange={e => handleChange(field.id, e.target.value)} required={field.required} className={`${baseClass} ${hasErr ? 'input-error' : ''}`} placeholder="Ketik jawaban..." />;
+                    input = <input id={`field_${field.id}`} name={`field_${field.id}`} type={field.type} value={values[field.id] || ''} onChange={e => handleChange(field.id, e.target.value)} required={field.required} className={`${baseClass} ${hasErr ? 'input-error' : ''}`} placeholder="Ketik jawaban..." />;
                   } else if (field.type === 'textarea') {
-                    input = <textarea value={values[field.id] || ''} onChange={e => handleChange(field.id, e.target.value)} rows={4} required={field.required} className={`${baseClass} ${hasErr ? 'input-error' : ''}`} placeholder="Ketik detail..."></textarea>;
+                    input = <textarea id={`field_${field.id}`} name={`field_${field.id}`} value={values[field.id] || ''} onChange={e => handleChange(field.id, e.target.value)} rows={4} required={field.required} className={`${baseClass} ${hasErr ? 'input-error' : ''}`} placeholder="Ketik detail..."></textarea>;
                   } else if (field.type === 'dropdown') {
                     const opts = (field.options || '').split(',').map(o => o.trim()).filter(Boolean);
                     input = (
-                      <select value={values[field.id] || ''} onChange={e => handleChange(field.id, e.target.value)} required={field.required} className={`${baseClass} app-select ${hasErr ? 'input-error' : ''}`}>
+                      <select id={`field_${field.id}`} name={`field_${field.id}`} value={values[field.id] || ''} onChange={e => handleChange(field.id, e.target.value)} required={field.required} className={`${baseClass} app-select ${hasErr ? 'input-error' : ''}`}>
                         <option value="" disabled>-- Pilih Salah Satu --</option>
                         {opts.map(o => <option key={o} value={o}>{o}</option>)}
                       </select>
@@ -274,10 +274,10 @@ export default function ViewFormFill({ formTitle, formDesc, formTheme, formFont,
                     const opts = (field.options || '').split(',').map(o => o.trim()).filter(Boolean);
                     const checked = (values[field.id] || '').split(',').map(v => v.trim()).filter(Boolean);
                     input = (
-                      <div className={`mt-4 flex flex-col gap-1 ${hasErr ? 'input-error' : ''}`}>
-                        {opts.map(o => (
-                          <label key={o} className="flex items-center space-x-3 mb-2 p-3 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl cursor-pointer hover:bg-white focus-within:ring-2 focus-within:ring-blue-100 smooth-transition tap-effect shadow-sm">
-                            <input type="checkbox" checked={checked.includes(o)} onChange={e => handleCheckbox(field.id, o, e.target.checked)} className="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500" />
+                      <div className={`mt-4 flex flex-col gap-1 ${hasErr ? 'input-error' : ''}`} role="group" aria-labelledby={`label_${field.id}`}>
+                        {opts.map((o, idx) => (
+                          <label htmlFor={`field_${field.id}_opt_${idx}`} key={o} className="flex items-center space-x-3 mb-2 p-3 sm:p-4 bg-slate-50 border border-slate-200 rounded-2xl cursor-pointer hover:bg-white focus-within:ring-2 focus-within:ring-blue-100 smooth-transition tap-effect shadow-sm">
+                            <input id={`field_${field.id}_opt_${idx}`} name={`field_${field.id}`} type="checkbox" checked={checked.includes(o)} onChange={e => handleCheckbox(field.id, o, e.target.checked)} className="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500" />
                             <span className="text-sm sm:text-base font-semibold text-slate-700">{o}</span>
                           </label>
                         ))}
@@ -287,20 +287,20 @@ export default function ViewFormFill({ formTitle, formDesc, formTheme, formFont,
                     const file = files[field.id];
                     const preview = filePreviews[field.id];
                     input = (
-                      <div className={`mt-3 relative w-full min-h-[6rem] border-2 border-slate-300 border-dashed rounded-2xl flex flex-col items-center justify-center bg-slate-50 text-slate-500 font-bold text-base overflow-hidden tap-effect hover:bg-slate-100 smooth-transition p-4 ${hasErr ? 'input-error' : ''}`}>
+                      <label htmlFor={`field_${field.id}`} className={`mt-3 relative w-full min-h-[6rem] border-2 border-slate-300 border-dashed rounded-2xl flex flex-col items-center justify-center bg-slate-50 text-slate-500 font-bold text-base overflow-hidden tap-effect hover:bg-slate-100 smooth-transition p-4 ${hasErr ? 'input-error' : ''}`}>
                         <div className="flex flex-col items-center justify-center pointer-events-none z-10 w-full transition-all">
                           <i className={`fas ${file ? 'fa-check-circle text-emerald-500' : 'fa-upload text-slate-400'} text-3xl mb-2`}></i>
                           <span className="text-center text-sm truncate w-full px-2">{file ? <span className="text-blue-600 font-extrabold">{file.name}</span> : 'Ketuk untuk Upload File (Maks 5MB)'}</span>
                         </div>
                         {preview && <img src={preview} className="mt-3 max-h-40 rounded-xl object-contain z-10 shadow-sm border border-slate-200" />}
-                        <input type="file" className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-20" onChange={e => handleFileSelect(field.id, e.target.files[0])} />
-                      </div>
+                        <input id={`field_${field.id}`} name={`field_${field.id}`} type="file" className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-20" onChange={e => handleFileSelect(field.id, e.target.files[0])} />
+                      </label>
                     );
                   }
 
                   return (
                     <div key={field.id} id={`wrapper_${field.id}`} className={`${hidden ? 'logic-hide' : 'logic-show'} smooth-transition bg-white p-2 rounded-2xl relative logic-item ${hasErr ? 'has-error animate-shake' : ''}`}>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-700 ml-1 mb-1">{field.label} {reqStar}</label>
+                      <label id={`label_${field.id}`} htmlFor={`field_${field.id}`} className="block text-sm sm:text-base font-extrabold text-slate-700 ml-1 mb-1">{field.label} {reqStar}</label>
                       {input}
                       {hasErr && (
                         <div className="error-text" style={{ display: 'flex' }}>
